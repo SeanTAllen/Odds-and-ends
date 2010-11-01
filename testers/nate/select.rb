@@ -1,0 +1,36 @@
+require 'rubygems'
+require 'nate'
+
+doc = <<EOS
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Add New To Do</title>
+  <link rel="stylesheet" href="/stylesheets/screen.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/stylesheets/print.css" type="text/css" media="print" />	
+  <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/stylesheets/ie.css" type="text/css" media="screen, projection">
+  <![endif]-->
+</head>
+<body class="bp">
+  <div id="container" class="container">
+    <div id="header"><img src="/images/icon.png" alt="Application Icon" /><h1>Simple To Do</h1></div>
+    <div id="content">
+      <form method='post' action='add'>
+        <div class='add-todo'>
+          <input type='image' src='/images/add.png'/>
+        </div>
+        <div class='title-entry'>
+          <label for='todo-title'>To Do: </label>
+          <input id='todo-title' name='title' size='100' type='text'/>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+EOS
+
+nate = Nate::Engine.from_string doc
+nate.select( '#content > *' )

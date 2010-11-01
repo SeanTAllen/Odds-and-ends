@@ -1,13 +1,16 @@
 require 'rubygems'
 require 'nokogiri'
 
-html = Nokogiri::HTML.fragment( '<table><tr class="todo"> 
+html = Nokogiri::XML.parse( '<table><tr class="todo"> 
 <td class="title">Hi</td> 
     <td> 
-      <form method="post" action="/finished"> 
-        <input type="hidden" name="id" value=""><input type="submit" value="Completed"> 
+      <form id="x" method="post" action="/finished">
+Hi 
+        <input type="hidden" name="id" value=""/><input type="submit" value="Completed"/> 
 </form> 
     </td> 
   </tr></table>' )
-puts html.css( 'form > *' )
-
+puts Nokogiri::CSS.xpath_for( '#x > *' )
+#puts html.search( "//*[@id = 'x']/node()" )
+puts html.search( "form+$" )
+#puts html.css( "#x > node()" )

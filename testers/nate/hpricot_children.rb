@@ -7,6 +7,7 @@ x = <<HTML
     <div id="header"><img src="/images/icon.png" alt="Application Icon" /><h1>Simple To Do</h1></div>
     <div id="content">
       <form method='post' action='add'>
+        hi
         <div class='add-todo'>
           <input type='image' src='/images/add.png'/>
         </div>
@@ -21,5 +22,5 @@ x = <<HTML
 HTML
 
 h = Hpricot x
-i = h.search( "#content > *" )
-puts i
+i = h.search( "form > *" )
+puts i.to_html
