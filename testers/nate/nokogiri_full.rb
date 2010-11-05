@@ -7,7 +7,7 @@ puts "1: #{y}"
 y = Nokogiri::XML.parse( '<div/><div/>' ).inspect
 puts "2: #{y}"
 
-y = Nokogiri::XML.fragment( '<div/><div/>' ).to_xml
+y = Nokogiri::XML.fragment( '<div/><div/>' ).to_xhtml
 puts "3: #{y}"
 
 #y = Nokogiri::XML.fragment( '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 

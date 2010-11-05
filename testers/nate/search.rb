@@ -1,6 +1,19 @@
 require 'rubygems'
 require 'nokogiri'
 
-fragment = Nokogiri::HTML.parse( "<div id='header'>Header</div><div id='content'><h1>Content</h1></div>" )
-fragment.search( "#content > *" ).each { | node | puts "search found #{node}" }
-fragment.css( "#content > *" ).each { | node | puts "css found #{node}" }
+module Nokogiri
+  module XML
+    class  DocumentFragment
+      def search( *args )
+        if children.any?
+          children.search(*args)
+        else
+          NodeSet.new(document)
+        end
+      end
+    end
+  end
+end
+fragment = Nokogiri::XML.fragment( '<div id="content">content</div><div id="content2">content2<h1 id="x">hi</h1></div>' )
+puts "css:" + (fragment.css( "#content" )).to_s
+puts "search:" + (fragment.search( "#x" )).to_s

@@ -1,20 +1,6 @@
 require 'rubygems'
 require 'nokogiri'
 
-module Nokogiri
-  module XML
-    class  DocumentFragment
-      def search( *args )
-        if children.any?
-          children.search(*args)
-        else
-          NodeSet.new(document)
-        end
-      end
-    end
-  end
-end
-
 page = <<EOS
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -55,14 +41,9 @@ page = <<EOS
 </html>
 EOS
 
-page = <<EOS
-<html xmls='http://www.w3.org/1999/xhtml'><head></head><body><div='header'><p></p>header</div></body></html>
-EOS
-
-frag = Nokogiri::XML.fragment( page )
+frag = Nokogiri::XML.parse( page )
 #puts frag.root.namespaces.inspect
 #puts frag.inspect
-puts frag.search( '#header', { 'xmlns' => 'http://www.w3.org/1999/xhtml' } )
-#puts frag.css( 'body' ).each do |node|
-#  puts node.to_xhtml
-#end
+frag.css( 'body', {"xmlns"=>"http://www.w3.org/1999/xhtml"} ).each do |node|
+  puts node.to_xml
+end
